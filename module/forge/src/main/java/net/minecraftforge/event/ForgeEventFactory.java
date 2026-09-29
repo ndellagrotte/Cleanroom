@@ -96,6 +96,7 @@ import net.minecraftforge.event.entity.ThrowableImpactEvent;
 import net.minecraftforge.event.entity.item.ItemExpireEvent;
 import net.minecraftforge.event.entity.living.AnimalTameEvent;
 import net.minecraftforge.event.entity.living.LivingDestroyBlockEvent;
+import net.minecraftforge.event.entity.living.LivingElytraDeployEvent;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.event.entity.living.LivingExperienceDropEvent;
 import net.minecraftforge.event.entity.living.LivingHealEvent;
@@ -801,6 +802,11 @@ public class ForgeEventFactory
     public static boolean onEntityDestroyBlock(EntityLivingBase entity, BlockPos pos, IBlockState state)
     {
         return !MinecraftForge.EVENT_BUS.post(new LivingDestroyBlockEvent(entity, pos, state));
+    }
+
+    public static boolean onElytraDeploy(EntityLivingBase entity, ItemStack elytra)
+    {
+        return !MinecraftForge.EVENT_BUS.post(new LivingElytraDeployEvent(entity, elytra));
     }
 
     public static boolean gatherCollisionBoxes(World world, Entity entity, AxisAlignedBB aabb, List<AxisAlignedBB> outList)

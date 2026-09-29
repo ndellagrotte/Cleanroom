@@ -116,6 +116,15 @@
          boolean flag4 = this.getFoodStats().getFoodLevel() > 6.0F || this.capabilities.allowFlying;
          if (this.onGround
              && !flag1
+@@ -827,7 +853,7 @@
+             && !this.capabilities.isFlying) {
+             ItemStack itemstack = this.getItemStackFromSlot(EntityEquipmentSlot.CHEST);
+             if (itemstack.getItem() == Items.ELYTRA && ItemElytra.isUsable(itemstack)) {
+-                this.connection.sendPacket(new CPacketEntityAction(this, CPacketEntityAction.Action.START_FALL_FLYING));
++                if (net.minecraftforge.event.ForgeEventFactory.onElytraDeploy(this, itemstack)) this.connection.sendPacket(new CPacketEntityAction(this, CPacketEntityAction.Action.START_FALL_FLYING)); // Forge: LivingElytraDeployEvent
+             }
+         }
+ 
 @@ -1029,4 +1055,16 @@
              }
          }
